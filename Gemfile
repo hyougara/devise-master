@@ -10,10 +10,7 @@ gem 'enum_help'
 gem 'acts-as-taggable-on'
 gem 'kaminari'
 gem 'ransack'
-gem "rails_admin"
-gem "cancancan"
 gem 'devise'
-gem 'omniauth-twitter'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
