@@ -1,0 +1,19 @@
+- provide(:title, current_user.username)
+.user-profile
+  .pofile-logo
+    h1 ユーザー編集
+  .user-body
+    .user-image
+      - if @user.image_name.present? 
+        = image_tag current_user.image_name.thumb.url 
+      - else
+        = image_tag 'default.png',size:'50x50'
+    .user-name
+      p.name ユーザー名
+      .user-username
+        = @user.username
+    .user-email
+      p.email email
+      .user-useremail = @user.email
+    .link
+      .btn.btn-info = link_to "プロフィール変更", edit_user_registration_path

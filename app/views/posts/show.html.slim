@@ -1,0 +1,29 @@
+- provide(:title, "詳細")
+
+table.table.table-hover
+    thead
+      tr
+        th  
+        th  Title:
+        th  Content:
+        th  Status:
+        th  Priority:
+        th  Limit:
+        th  tag:
+    
+    tbody
+      tr.warning
+        - if @post.favorites.present?
+            td = fa_icon 'heart lg', 'data-post_id': @post.id, class: 'favorite'
+        - else
+            td = fa_icon 'heart lg', 'data-post_id': @post.id, class: 'unfavorite'
+        td = @post.title
+        td = @post.content
+        td = @post.status_i18n
+        td = @post.priority_i18n
+        td = @post.limit
+        td = render 'posts/tag_list', tag_list: @post.tag_list
+
+
+= link_to '編集', edit_post_path(@post)
+= link_to '戻る', posts_path

@@ -1,0 +1,55 @@
+h2 ユーザー編集 
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+  .field
+    = f.label :username
+    br
+    = f.text_field :username ,autofocus: true
+  .field
+    = f.label :email
+    br
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    div
+      | Currently waiting confirmation for: 
+      = resource.unconfirmed_email
+  .field
+    = f.label :password
+    i
+      | (変更する場合は入力して下さい)
+    br
+    = f.password_field :password, autocomplete: "new-password"
+    - if @minimum_password_length
+      br
+      em
+        = @minimum_password_length
+        |  文字以上
+  .field
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+  .field
+    = f.label :current_password
+    i
+      | (確認の為現在のパスワードを入力してください)
+    br
+    = f.password_field :current_password, autocomplete: "current-password"
+  .image-name
+    - if current_user.image_name.present?
+      = image_tag current_user.image_name.thumb.url, size:'50x50'
+      label
+        = f.check_box :remove_image_name
+        |  画像を削除
+    - else
+      = image_tag 'default.png'
+      = f.hidden_field :image_name_cache
+  .image
+    = f.file_field :image_name
+  .actions
+    = f.submit "更新"
+- if current_user.admin?
+  = link_to "戻る", :back
+- else
+  p アカウントを削除する場合はこちら
+  = button_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除しますか？" }, method: :delete
+  = link_to "戻る", :back
